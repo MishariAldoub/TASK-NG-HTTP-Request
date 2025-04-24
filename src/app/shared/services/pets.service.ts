@@ -5,6 +5,7 @@ import { Pet } from '../../../data/pets';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { BaseService } from './base.service';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,16 @@ export class PetsService extends BaseService {
     );
   }
 
-  addPost(post: Pet): Observable<Pet> {
+  getAPet(id: number): Observable<Pet | null> {
+    return this.get<Pet>(`${this.getPetApi}/${id}`).pipe(
+      catchError((error) => {
+        console.error('Error fetching posts:', error);
+        return of(null);
+      })
+    );
+  }
+
+  addPets(post: Pet): Observable<Pet> {
     return this.post<Pet>(this.getPetApi, post).pipe(
       catchError((error) => {
         console.error('Error adding post:', error);

@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center items-center">
   <app-pets-header (search)="setQuery($event)"></app-pets-header>
-  <!-- <app-pets-list [pets]="filteredPets"></app-pets-list> -->
-  @if (error(); as errMsg) {
+  <app-pets-list [pets]="filteredPets"></app-pets-list>
+  <!-- @if (error(); as errMsg) {
   <p style="color: red">{{ errMsg }}</p>
   }
 
@@ -14,5 +14,5 @@
     }
   </ul>
 
-  <hr />
+  <hr /> -->
 </div>
